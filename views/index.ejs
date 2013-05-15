@@ -1,0 +1,98 @@
+<html>
+	<head>
+        <title>Shopping Cart</title>    	
+        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
+		<script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>	
+        <script type="text/javascript" src="/javascripts/script.js"></script>	
+		
+    </head>
+<body>
+<div class="outer">
+		<font style = "color : red" id="error"><%=error%></font>
+		<div class="cart">
+            <br />
+			<table border="1" id="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Quantity</th>
+                        <th>Remove Item</th>
+						<th>Edit Item</th>
+					</tr>
+				</thead>
+				<tbody class="container">
+				
+					<!--render table with items data -->
+					<% for(var i=0; i<items.length; i++) { %>
+						<tr id="<%= items[i]._id %>">						
+							<td class='name' id='name'><%= items[i].name %></td>
+							<td class='price' id='price'><%= items[i].price %></td>
+							<td class='qty' id='qty'><%= items[i].qty %></td>
+							<td><a href="#" onclick="removeData(this)" data='<%= items[i]._id %>' class="btnRemove" name="remove">Remove</a></td>
+							<td><a i=<%=i%> data="<%= items[i]._id %>" href="#" class="btnEdit" onclick='editData(this)'>Edit</a></td>
+						</tr>
+					<% } %>
+					
+				</tbody>
+			</table>
+			<br />
+			
+			<!--calculate total and then display total-->
+			<%var total = 0%>
+			<%for(var i=0; i<items.length; i++) {
+				total = total + items[i].price * items[i].qty;}
+			%>
+			<div class="total">Total Price:<%=total%></div>
+			
+			<br />
+			
+			<!--insertion table form-->
+			<table class="addT" id="addT">
+            <form id="form1">
+				<tr>
+					<td>Name: </td>
+					<td><input type="text" name="name" id="txtnm"  /></td>
+				</tr>
+				<tr>
+					<td>Price: </td>
+					<td><input type="text" name="price" id="txtprice" /></td>
+				</tr>
+				<tr>
+					<td>Quantity: </td>
+					<td><input type="text" name="qty" id="txtqty" /></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="Add" id="add" /> </td>				
+				</tr>
+                </form>
+			</table>
+			
+			<!--updation table form-->
+			<table class="updateT" id="updateT">
+            <form id="form2">
+				<tr>
+					<td>Name: </td>
+					<td><input type="text" name="name" id="txtnm1"  /></td>
+				</tr>
+				<tr>
+					<td>Price: </td>
+					<td><input type="text" name="price" id="txtprice1" /></td>
+				</tr>
+				<tr>
+					<td>Quantity: </td>
+					<td><input type="text" name="qty" id="txtqty1" /></td>
+				</tr>
+				<tr>
+					<td><input type="button" value="Update" id="update" />&nbsp;<input type="button" value="Cancel" id="cancel" /></td>
+					<td><input type="hidden" name="hide" id="hide" value=""></td>				
+				</tr>
+                </form>
+			</table>	
+					
+		</div>
+	</div>
+	
+</body>
+</html>

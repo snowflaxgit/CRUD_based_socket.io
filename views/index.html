@@ -1,0 +1,102 @@
+<html>
+	<head>
+        <title>Shopping Cart</title>    	
+        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
+		<script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="/javascripts/script.js">
+        
+        </script>
+    </head>
+<body>
+<div class="outer">
+		<div class="cart">
+            <br />
+			<table border="1" id="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Quantity</th>
+                        <th>Remove Item</th>
+						<th>Edit Item</th>
+					</tr>
+				</thead>
+				<tbody class="container">
+                	<script type="text/javascript">
+						socket.on('item', function (data) {
+	  					var items = data.msg;	
+					    console.log(items);
+					//<% for(var i=0; i<items.length; i++) { %>
+//						<tr id="tr<%=i%>">						
+//							<td class='name'><%= items[i].name %></td>
+//							<td class='price'><%= items[i].price %></td>
+//							<td class='qty'><%= items[i].qty %></td>
+//							<td><a href="/<%= items[i]._id %>" data='<%= items[i]._id %>' class="btnRemove">Remove</a></td>
+//							<td><a i=<%=i%> data="<%= items[i]._id %>" href="#" class="btnEdit">Edit</a></td>
+//						</tr>
+//					<% } %>
+						})
+					</script>
+					<% for(var i=0; i<items.length; i++) { %>
+						<tr id="tr<%=i%>">						
+							<td class='name'><%= items[i].name %></td>
+							<td class='price'><%= items[i].price %></td>
+							<td class='qty'><%= items[i].qty %></td>
+							<td><a href="#" data='<%= items[i]._id %>' class="btnRemove">Remove</a></td>
+							<td><a i=<%=i%> data="<%= items[i]._id %>" href="#" class="btnEdit">Edit</a></td>
+						</tr>
+					<% } %>
+				</tbody>
+			</table>
+			<br />
+			<%var total = 0%>
+			<%for(var i=0; i<items.length; i++) {
+				total = total + items[i].price * items[i].qty;}
+			%>
+			<div class="total">Total Price:<%=total%></div>
+			<br />
+			<table class="addT">
+            <form method="post" action="/">
+				<tr>
+					<td>Name: </td>
+					<td><input type="text" name="name" id="txtnm"  /></td>
+				</tr>
+				<tr>
+					<td>Price: </td>
+					<td><input type="text" name="price" id="txtprice" /></td>
+				</tr>
+				<tr>
+					<td>Quantity: </td>
+					<td><input type="text" name="qty" id="txtqty" /></td>
+				</tr><font style = "color : red"><%=error%></font>
+				<tr>
+					<td><input type="submit" value="Add" id="add" /> </td>				
+				</tr>
+                </form>
+			</table>
+			<table class="updateT">
+            <form method="post" action="/edit/">
+				<tr>
+					<td>Name: </td>
+					<td><input type="text" name="name" id="txtnm1"  /></td>
+				</tr>
+				<tr>
+					<td>Price: </td>
+					<td><input type="text" name="price" id="txtprice1" /></td>
+				</tr>
+				<tr>
+					<td>Quantity: </td>
+					<td><input type="text" name="qty" id="txtqty1" /></td>
+				</tr><font style = "color : red"><%=error1%></font>
+				<tr>
+					<td><input type="button" value="Update" id="update" /></td>
+					<td><input type="hidden" name="hide" id="hide" value=""></td>				
+				</tr>
+                </form>
+			</table>			
+		</div>
+	</div>
+	
+</body>
+</html>

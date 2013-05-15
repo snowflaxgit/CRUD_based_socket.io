@@ -1,0 +1,39 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+table
+{
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+
+table td,th
+{
+    padding: 8px 8px;
+}
+
+.boldText { font-weight:bold; }
+
+.outer{
+	position: absolute;
+	width: auto;
+	background: rgb(248, 248, 248);
+}
+
+.edit{
+	position: absolute;
+	width: auto;
+	background: rgb(248, 248, 248);
+	top: 15%;
+	left: 15%;
+	display:none;
+}
+.updateT{
+	display:none;}
+.addT{};

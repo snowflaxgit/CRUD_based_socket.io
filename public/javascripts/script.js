@@ -88,18 +88,34 @@ $(document).ready(function(e) {
 	   
 	   total();
    });   
+
+var letters = /^[A-Za-z]+$/;  
+var numbers = /^[0-9]+$/;	
 	
 	//call this function when click on add button 
 	$('#add').click(function(e) {
-		var formData = $('#form1').serialize(); // retrieve submited data from form.
-        $.post('/add',formData,function(data){
+		var formData = $('#form1').serializeArray(); // retrieve submited data from form.
+        
+		var name = formData[0]['value'],
+			price = formData[1]['value'],
+			qty = formData[2]['value'];
+			
+		$.post('/add',formData,function(data){
 			if(data){
 			   $('#txtnm').val("");
 			   $('#txtprice').val("");
 			   $('#txtqty').val("");
 			}
-			else{				
-				  alert("Enter Value In Proper Format."); // show alert box if respose is false
+			else{
+				 // show alert box if respose is false
+				if(name.match(letters) && name.length <=15){}
+				else{alert("Please enter name in alphabet only...");}
+				
+				if(price.match(numbers) && price.length <=5){}
+				else{alert("Please enter price in number only...");}
+				
+				if(qty.match(numbers) && qty.length <=3){}
+				else{alert("Please enter quantity in number only...");}
 			}
 		});
     });
@@ -109,13 +125,25 @@ $(document).ready(function(e) {
        var id = $('#hide').attr("value");
 		$('.addT').css("display","block");
 		$('.updateT').css("display","none");
-		var formData = $('#form2').serialize();  // retrieve submited data from form.
+		var formData = $('#form2').serializeArray();  // retrieve submited data from form.
+
+		var name = formData[0]['value'],
+			price = formData[1]['value'],
+			qty = formData[2]['value'];
 				
 		$.post("/edit/"+id ,formData,function(data){
 			if(data){
 			}
 			else{
-				  alert("Enter Value In Proper Format.");	// show alert box if respose is false
+				 // show alert box if respose is false
+				if(name.match(letters) && name.length <=15){}
+				else{alert("Please enter name in alphabet only...");}
+				
+				if(price.match(numbers) && price.length <=5){}
+				else{alert("Please enter price in number only...");}
+				
+				if(qty.match(numbers) && qty.length <=3){}
+				else{alert("Please enter quantity in number only...");}
 			}
 		});
 		

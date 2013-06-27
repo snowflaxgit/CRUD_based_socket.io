@@ -109,13 +109,13 @@ var numbers = /^[0-9]+$/;
 			else{
 				 // show alert box if respose is false
 				if(name.match(letters) && name.length <=15){}
-				else{alert("Please enter name in alphabet only...");}
+				else{alert("Please Enter Name in Alphabet only...");}
 				
 				if(price.match(numbers) && price.length <=5){}
-				else{alert("Please enter price in number only...");}
+				else{alert("Please Enter Price in Number only...");}
 				
 				if(qty.match(numbers) && qty.length <=3){}
-				else{alert("Please enter quantity in number only...");}
+				else{alert("Please Enter Quantity in Number only...");}
 			}
 		});
     });
